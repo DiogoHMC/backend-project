@@ -7,7 +7,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  @Post('add')
+  @Post('create')
   async create(@Body() createProductDto: CreateProductDto) {
     try {
       console.log('Received create product request with data:', createProductDto);
@@ -60,7 +60,7 @@ export class ProductController {
     }
   }
 
-  @Get(':id')
+  @Get('get/:id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     try {
       const product = await this.productService.findOne(id);
@@ -105,7 +105,7 @@ export class ProductController {
     }
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   async remove(@Param('id', ParseIntPipe) id: number) {
     try {
       const product = await this.productService.remove(id);
