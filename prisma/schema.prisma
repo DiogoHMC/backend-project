@@ -38,9 +38,20 @@ model Product {
   name        String
   price       Float
   description String?
-  stock       Int         @default(0)
-  cartItems   CartItem[]
+  stock       Int
+  categoryId  Int
+  category    Category    @relation(fields: [categoryId], references: [id])
+
+  cartItems   CartItem[] 
 }
+
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  products Product[]
+}
+
 
 enum CartStatus {
   ACTIVE
