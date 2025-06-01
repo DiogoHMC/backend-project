@@ -1,4 +1,4 @@
-#Backend API for E-commerce System
+# Backend API for E-commerce System
 This backend is built with NestJS and Prisma ORM and provides CRUD and status management endpoints for products, categories, cart items, and carts.
 
 How to Run
@@ -26,8 +26,8 @@ Manage Cart Items: add items to cart, read, update, delete.
 
 Manage Carts: create carts, update carts, delete carts, and manage cart status (active, checkout, completed, abandoned).
 
-##API Usage Guide
-###Product Endpoints **(/product)**
+## API Usage Guide
+### Product Endpoints **(/product)**
 
 **POST /product/create**
 Create a new product.
@@ -49,7 +49,7 @@ Delete a product by ID.
 **GET /product/search?name=&categoryId=&categoryName=**
 Search products by name and/or category ID or category name (query parameters optional).
 
-###Category Endpoints **(/category)**
+### Category Endpoints **(/category)**
 
 **POST /category/create**
 Create a new category.
@@ -68,7 +68,7 @@ Body: fields to update.
 **DELETE /category/remove/:id**
 Delete category by ID.
 
-###Cart Item Endpoints **(/cart-item)**
+### Cart Item Endpoints **(/cart-item)**
 
 **POST /cart-item/create**
 Add item to cart.
@@ -87,7 +87,7 @@ Body: fields to update.
 **DELETE /cart-item/delete/:id**
 Delete cart item by ID.
 
-###Cart Endpoints **(/cart)**
+### Cart Endpoints **(/cart)**
 
 **POST /cart/create**
 Create a new cart.
@@ -115,7 +115,7 @@ Change cart status to COMPLETED.
 **POST /cart/abandon/:id**
 Change cart status to ABANDONED.
 
-##**Notes**
+## **Notes**
 All IDs in URL parameters are numbers.
 
 Use JSON format in request bodies for create/update.
