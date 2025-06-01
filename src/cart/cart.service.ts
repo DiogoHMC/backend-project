@@ -103,4 +103,56 @@ export class CartService {
       throw new InternalServerErrorException('Failed to delete cart');
     }
   }
+
+  async checkoutCart(id: number) {
+    try {
+      const cart = await this.prisma.cart.findUnique({ where: { id } });
+      if (!cart) {
+        throw new NotFoundException(`Cart with ID ${id} not found`);
+      }
+      const updatedCart = await this.prisma.cart.update({
+        where: { id },
+        data: { status: 'CHECKOUT' },
+      });
+      return updatedCart;
+    } catch (error) {
+      if (error instanceof NotFoundException) throw error;
+      throw new InternalServerErrorException(`Failed to checkout cart: ${error.message}`);
+    }
+  }
+
+  async completeCart(id: number) {
+    try {
+      const cart = await this.prisma.cart.findUnique({ where: { id } });
+      if (!cart) {
+        throw new NotFoundException(`Cart with ID ${id} not found`);
+      }
+      const updatedCart = await this.prisma.cart.update({
+        where: { id },
+        data: { status: 'COMPLETED' },
+      });
+      return updatedCart;
+    } catch (error) {
+      if (error instanceof NotFoundException) throw error;
+      throw new InternalServerErrorException(`Failed to complete cart: ${error.message}`);
+    }
+  }
+
+  async abandonCart(id: number) {
+    try {
+      const cart = await this.prisma.cart.findUnique({ where: { id } });
+      if (!cart) {
+        throw new NotFoundException(`Cart with ID ${id} not found`);
+      }
+      const updatedCart = await this.prisma.cart.update({
+        where: { id },
+        data: { status: 'ABANDONED' },
+      });
+      return updatedCart;
+    } catch (error) {
+      if (error instanceof NotFoundException) throw error;
+      throw new InternalServerErrorException(`Failed to abandon cart: ${error.message}`);
+    }
+  }
+  
 }

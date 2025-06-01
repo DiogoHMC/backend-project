@@ -133,4 +133,69 @@ export class CartController {
     }
   }
 
+  @Post('checkout/:id')
+  async checkout(@Param('id') id: string) {
+    try {
+      const cart = await this.cartService.checkoutCart(+id);
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Cart moved to checkout successfully',
+        data: cart,
+      };
+    } catch (error) {
+      throw new HttpException(
+        {
+          statusCode: error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+          message: error.message || 'Failed to checkout cart',
+          error: error.response?.message || error.message,
+        },
+        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+  
+  @Post('complete/:id')
+  async complete(@Param('id') id: string) {
+    try {
+      const cart = await this.cartService.completeCart(+id);
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Cart completed successfully',
+        data: cart,
+      };
+    } catch (error) {
+      throw new HttpException(
+        {
+          statusCode: error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+          message: error.message || 'Failed to complete cart',
+          error: error.response?.message || error.message,
+        },
+        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+  
+  @Post('abandon/:id')
+  async abandon(@Param('id') id: string) {
+    try {
+      const cart = await this.cartService.abandonCart(+id);
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Cart abandoned successfully',
+        data: cart,
+      };
+    } catch (error) {
+      throw new HttpException(
+        {
+          statusCode: error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+          message: error.message || 'Failed to abandon cart',
+          error: error.response?.message || error.message,
+        },
+        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+  
+
+
 }

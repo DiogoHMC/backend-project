@@ -1,98 +1,127 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+#Backend API for E-commerce System
+This backend is built with NestJS and Prisma ORM and provides CRUD and status management endpoints for products, categories, cart items, and carts.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
+How to Run
+1. Start the NestJS server (development mode)
 ```bash
-$ pnpm install
+pnpm start:dev
 ```
 
-## Compile and run the project
+This command runs your backend API locally in development mode with hot reload.
 
+2. Open Prisma Studio (Database UI)
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+pnpx prisma studio
 ```
+Prisma Studio provides a GUI to view and edit your database records directly.
 
-## Run tests
+Functionalities
+This backend provides the following core functionalities via RESTful API endpoints:
 
-```bash
-# unit tests
-$ pnpm run test
+Manage Products: create, read, update, delete, and search by name or category.
 
-# e2e tests
-$ pnpm run test:e2e
+Manage Categories: create, read, update, delete.
 
-# test coverage
-$ pnpm run test:cov
-```
+Manage Cart Items: add items to cart, read, update, delete.
 
-## Deployment
+Manage Carts: create carts, update carts, delete carts, and manage cart status (active, checkout, completed, abandoned).
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+##API Usage Guide
+###Product Endpoints **(/product)**
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+**POST /product/create**
+Create a new product.
+Body: { name, price, description, categoryId, ... }
 
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
-```
+**GET /product/information**
+Get all products.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+**GET /product/information/:id**
+Get a product by ID.
 
-## Resources
+**PATCH /product/update/:id**
+Update a product by ID.
+Body: fields to update.
 
-Check out a few resources that may come in handy when working with NestJS:
+**DELETE /product/remove/:id**
+Delete a product by ID.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+**GET /product/search?name=&categoryId=&categoryName=**
+Search products by name and/or category ID or category name (query parameters optional).
 
-## Support
+###Category Endpoints **(/category)**
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+**POST /category/create**
+Create a new category.
+Body: { name, description, ... }
 
-## Stay in touch
+**GET /category/all**
+Get all categories.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+**GET /category/:id**
+Get category by ID.
 
-## License
+**PATCH /category/update/:id**
+Update category by ID.
+Body: fields to update.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+**DELETE /category/remove/:id**
+Delete category by ID.
+
+###Cart Item Endpoints **(/cart-item)**
+
+**POST /cart-item/create**
+Add item to cart.
+Body: { cartId, productId, quantity, ... }
+
+**GET /cart-item/all**
+Get all cart items.
+
+**GET /cart-item/get/:id**
+Get cart item by ID.
+
+**PATCH /cart-item/update/:id**
+Update cart item by ID.
+Body: fields to update.
+
+**DELETE /cart-item/delete/:id**
+Delete cart item by ID.
+
+###Cart Endpoints **(/cart)**
+
+**POST /cart/create**
+Create a new cart.
+Body: { userId, status, ... }
+
+**GET /cart/all**
+Get all carts.
+
+**GET /cart/get/:id**
+Get cart by ID.
+
+**PATCH /cart/:id**
+Update cart by ID.
+Body: fields to update.
+
+**DELETE /cart/delete/:id**
+Delete cart by ID.
+
+**POST /cart/checkout/:id**
+Change cart status to CHECKOUT.
+
+**POST /cart/complete/:id**
+Change cart status to COMPLETED.
+
+**POST /cart/abandon/:id**
+Change cart status to ABANDONED.
+
+##**Notes**
+All IDs in URL parameters are numbers.
+
+Use JSON format in request bodies for create/update.
+
+Successful responses have a consistent structure with statusCode, message, and data.
+
+Errors return appropriate HTTP status codes and error messages.
+
+Use Prisma Studio to view and manipulate data directly in the database during development.
