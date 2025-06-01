@@ -1,7 +1,7 @@
 # Backend API for E-commerce System
 This backend is built with NestJS and Prisma ORM and provides CRUD and status management endpoints for products, categories, cart items, and carts.
 
-How to Run
+## **How to Run**
 1. Start the NestJS server (development mode)
 ```bash
 pnpm start:dev
